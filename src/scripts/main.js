@@ -34,7 +34,7 @@ stepForm.addEventListener('submit', (e) => {
     }
 
     updatedb(data);
-    
+    updateWheels(db);
     duration.value = '';
     pace.value = '';
     date.value = '';

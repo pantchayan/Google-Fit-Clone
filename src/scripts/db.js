@@ -23,3 +23,6 @@ if (myStorage.getItem("steps") != null) {
   db = JSON.parse(myStorage.getItem("steps"));
   console.log(db);
 }
+
+
+// db.push({date: '10/30/2021', steps:'10000'})
