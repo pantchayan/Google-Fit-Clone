@@ -1,0 +1,87 @@
+.title-sec{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.time-period{
+    font-size: 3;
+    color: grey;
+}
+
+.visuals-sec{
+    display: flex;
+    justify-content: space-between;
+}
+
+#daily .visuals-sec{
+    color: blue;
+}
+
+#weekly .visuals-sec{
+    color: green;
+}
+
+#steps .visuals-sec{
+    color: darkblue;
+}
+
+.who-info{
+    display: flex;
+    color: grey;
+    justify-content: space-between;
+}
+
+#trend{
+    margin-left: auto !important;
+}
+
+.wheels{
+    height: 300px;
+}
+
+.legend{
+    height: 50px;
+}
+
+.nav{
+    height: 40px;
+}
+
+.top-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summary-details{
+    min-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: blue;
+    font-weight: 600;
+}
+
+.summary-details>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legend{
+    min-width: 300px;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 500;
+}
+
+.legend1, .legend2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.legend img{
+    padding-right: 7px;
+}
