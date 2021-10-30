@@ -1,3 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: "Lato", sans-serif; */
+}
+
+body{
+    overflow-x: hidden;
+}
+
 .title-sec{
     display: flex;
     flex-direction: row;
@@ -85,3 +96,22 @@
 .legend img{
     padding-right: 7px;
 }
+
+.overlay {
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    min-height: 100%;
+    width: 100vw;
+    background-color: rgba(224, 224, 224, 0.8);
+  }
+
+  .hide{
+      display: none !important;
+  }
+
+  .error{
+      color: red;
+  }
+
+  

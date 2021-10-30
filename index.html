@@ -8,10 +8,14 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./src/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./src/styles/index.css">
+    <link rel="stylesheet" href="./src/styles/button.css">
+    <link rel="stylesheet" href="./src/styles/addContainer.css">
 </head>
 
 <body class="bg-gray-100">
+    <div class="hide overlay"></div>
     <div class="nav container">
 
     </div>
@@ -105,14 +109,15 @@
             </div>
 
             <div class="who-info">
-                <div class="text-m font-small text-grey max-w-sm py-5">Scoring 150 Heart Points a week can help you live longer,
+                <div class="text-m font-small text-grey max-w-sm py-5">Scoring 150 Heart Points a week can help you live
+                    longer,
                     sleep better and boost your mood</div>
-                    <img class="h-21 w-40" src="./src/img/who-logo.png" alt="ChitChat Logo">
+                <img class="h-21 w-40" src="./src/img/who-logo.png" alt="ChitChat Logo">
             </div>
         </div>
 
         <!-- <div id ="trend" class="m-w-sm mx-auto text-xl font-medium text-blue">TRENDS</div> -->
-                    
+
         <div id="steps" class="
           p-4
           max-w-3xl
@@ -143,6 +148,88 @@
         </div>
 
     </div>
+
+
+    <div class="add-container hide
+          p-4
+          max-w-3xl
+          mx-auto
+          bg-white
+          rounded-xl
+          shadow-md
+          h-40
+          my-15 
+          ">
+        <p class="text-xl text-black my-5">
+            How much <span class="font-bold">steps</span> have you done today?
+        </p>
+        <form id="steps-input" class="w-full max-w-lg">
+            <div class="mb-4">
+                <label class="block text-gray-700  font-bold mb-2" for="steps">
+                    Set duration, pace and date.
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="steps-time" type="text" placeholder="Enter total duration(mins)">
+            </div>
+            <div class="inline-block relative w-64">
+                <select
+                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    id='steps-pace'>
+                    <option>Slow</option>
+                    <option>Paced</option>
+                    <option>Super Sayian</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="inline-block relative w-64 my-5">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <input datepicker="" type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
+                    placeholder="Select date" id='steps-date'>
+            </div>
+            <div class="mx-auto">
+                <button type="submit">Submit</button>
+            </div>
+            <p class="text-red error mx-auto"></p>
+        </form>
+    </div>
+
+    <a href="#" class="float" id="menu-share">
+        <i class="large material-icons my-float">add</i>
+    </a>
+    <ul>
+        <li><a href="#" id="detail-btn">
+                <i class="material-icons my-float">accessibility</i>
+            </a></li>
+        <li><a href="#" id="steps-btn">
+                <i class="material-icons my-float">directions_run</i>
+            </a></li>
+        <li><a href="#" id="activity-btn">
+                <i class="material-icons my-float">sports</i>
+            </a></li>
+    </ul>
+
+
+
+    <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="src/scripts/db.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/wheel.js"></script>
 </body>
 
 </html>
