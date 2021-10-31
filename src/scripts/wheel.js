@@ -17,7 +17,7 @@ let stepsWheel = d3
   .append("g")
   .attr("transform", `translate(${center.x}, ${center.y})`);
 
-let caloriesWheel = d3
+let pointsWheel = d3
   .select("svg")
   .append("g")
   .attr("transform", `translate(${center.x}, ${center.y})`);
@@ -27,10 +27,10 @@ const pieSteps = d3
   .sort(null)
   .value((d) => d.steps);
 
-const pieCalories = d3
+const piePoints = d3
   .pie()
   .sort(null)
-  .value((d) => d.calories);
+  .value((d) => d.points);
 
 const arcPathInner = d3.arc().outerRadius(100).innerRadius(90).cornerRadius(20);
 const arcPathOuter = d3
@@ -70,7 +70,6 @@ let buildDefaultWheels = () => {
 };
 
 let updateWheels = (data) => {
- 
   let d = new Date();
 
   let found = false;
@@ -85,14 +84,13 @@ let updateWheels = (data) => {
     }
   }
 
-
   if (!found) {
     // console.log("Same day steps not found");
     return;
   }
-  console.log(currData[0])
+  // console.log(currData[0]);
   currData.push({ steps: goalsDB[0].steps - currData[0].steps, date: "goal" });
-  console.log(currData[0].steps)
+  // console.log(currData[0].steps);
   let paths = stepsWheel.selectAll("path").data(pieSteps(currData));
 
   //   paths.exit().transition().duration(700).attrTween("d", arcTweenExit).remove();
@@ -138,18 +136,56 @@ let updateWheels = (data) => {
     .duration(1000)
     .attrTween("d", (d) => arcTweenEnterInner(d));
 
-  // Matric -> 1 step -> 0.04 calories
-  let caloriesData = [];
-  caloriesData.push({
-    calories: currData[0].steps * 0.04,
+  updatePointsWheel(currData);
+};
+
+let updatePointsWheel = (currData) => {
+  // Algorithm -> average steps of previous 10 days
+  // calculate total growth and give rewards on a scale of 0-25%
+  let d = new Date();
+  let prevDate = new Date(d.getTime() - 24 * 10 * 60 * 60 * 1000);
+  let prevDay = prevDate.getDate();
+  let prevMonth = prevDate.getMonth();
+  let prevYear = prevDate.getFullYear();
+
+  // (`${prevDay}/${prevMonth + 1}/${prevYear - 100}`)
+  let totalSteps = 0;
+  for (let j = 0; j < stepsDB.length; j++) {
+    for (let i = 0; i < 10; i++) {
+      if (`${prevMonth + 1}/${prevDay + i}/${prevYear}` === stepsDB[j].date) {
+        totalSteps += stepsDB[j].steps;
+        console.log(`${prevMonth + 1}/${prevDay + i}/${prevYear}`);
+      }
+    }
+  }
+
+  totalSteps += 5000;
+  let avgSteps = totalSteps / 10;
+  let diffRatio = ((currData[0].steps - avgSteps) / avgSteps) * 100;
+  if (diffRatio < 0) {
+    diffRatio = -0.1;
+  } else if (currData[0].steps / 10000 + diffRatio > 100) {
+    if (diffRatio > 0.75) {
+      diffRatio = 0.2;
+    }
+  }
+
+  let heartPoints = (currData[0].steps / 10000 + diffRatio) * 100;
+
+  updateCounters(currData[0].steps, heartPoints);
+  // Matric -> 1 step -> 0.04 points
+  let pointsData = [];
+  pointsData.push({
+    points: heartPoints,
     date: currData[0].date,
   });
-  caloriesData.push({
-    calories: currData[1].steps * 0.04,
+  pointsData.push({
+    points: 100 - pointsData[0].points,
     date: currData[1].date,
   });
+  // points WHEEL
 
-  paths = caloriesWheel.selectAll("path").data(pieCalories(caloriesData));
+  paths = pointsWheel.selectAll("path").data(piePoints(pointsData));
 
   paths
     .attr("class", "arc")
@@ -190,7 +226,12 @@ let updateWheels = (data) => {
     })
     .transition()
     .duration(1000)
-    .attrTween("d", (d) => arcTweenEnterOuter(d))
+    .attrTween("d", (d) => arcTweenEnterOuter(d));
+};
+
+let updateCounters = (steps, heartPoints) => {
+  console.log(steps, heartPoints)
+
 };
 
 buildDefaultWheels();
