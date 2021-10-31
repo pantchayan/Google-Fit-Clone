@@ -34,7 +34,7 @@ stepForm.addEventListener('submit', (e) => {
     }
 
     updatedb(data);
-    updateWheels(db);
+    updateWheels(stepsDB);
     duration.value = '';
     pace.value = '';
     date.value = '';
@@ -59,8 +59,8 @@ overlay.addEventListener('click', (e) => {
 
 let updatedb =  (data) => {
     let flag = false;
-    for(let i=0;i<db.length;i++){
-        let item = db[i];
+    for(let i=0;i<stepsDB.length;i++){
+        let item = stepsDB[i];
         if(item.date === data.date){
             flag = true;
             item.steps += data.steps;
@@ -68,8 +68,8 @@ let updatedb =  (data) => {
         }
     }
 
-    if(!flag) db.push(data);
+    if(!flag) stepsDB.push(data);
 
-    myStorage.setItem('steps', JSON.stringify(db));
+    myStorage.setItem('steps', JSON.stringify(stepsDB));
 
 }

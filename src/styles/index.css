@@ -9,6 +9,10 @@ body{
     overflow-x: hidden;
 }
 
+.container{
+    min-width: 100%;
+}
+
 .title-sec{
     display: flex;
     flex-direction: row;
@@ -113,5 +117,7 @@ body{
   .error{
       color: red;
   }
+
+
 
   
