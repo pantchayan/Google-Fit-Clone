@@ -37,6 +37,7 @@ stepForm.addEventListener("submit", (e) => {
   updateWheels(stepsDB);
 
   updateDailyWheels(stepsDB);
+  // updateWeeklyBar();
   duration.value = "";
   pace.value = "";
   date.value = "";

@@ -1,5 +1,5 @@
 let weekData = [];
-
+let totalWeekPoints = 0;
 const dailySVG = d3
   .select("#daily>.visuals-sec>.charts")
   .append("svg")
@@ -181,6 +181,7 @@ let buildDailyPointsWheels = (data) => {
         count++;
         heartPoints = 100;
     }
+    totalWeekPoints += heartPoints;
     // Matric -> 1 step -> 0.04 points
     let pointsData = [];
     pointsData.push({

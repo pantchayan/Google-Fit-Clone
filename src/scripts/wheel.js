@@ -234,3 +234,7 @@ const arcTweenEnterOuter = (d) => {
     return arcPathOuter(d);
   };
 };
+
+
+updateWeeklyBar();
+updateDailyBars();
