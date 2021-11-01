@@ -138,6 +138,10 @@ let updateWheels = (data) => {
   updateMainStats(currData[0].steps, duration)
   
   updateDailyWheels(data);
+
+  
+updateWeeklyBar();
+updateDailyBars();
 };
 
 
@@ -236,5 +240,3 @@ const arcTweenEnterOuter = (d) => {
 };
 
 
-updateWeeklyBar();
-updateDailyBars();
