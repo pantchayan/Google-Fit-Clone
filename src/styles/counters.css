@@ -1,0 +1,15 @@
+#steps-counter{
+    color: blue;
+    position: absolute;
+}
+
+#points-counter{
+    color: blue;
+    position: absolute;
+}
+
+.main-counters{
+    display: flex;
+    flex-direction: column;
+    color: blue;
+}

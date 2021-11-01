@@ -70,12 +70,14 @@ body{
 }
 
 .summary-details{
-    min-width: 300px;
+    margin-left: 20px;
+    min-width: 200px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
     margin-top: 30px;
     color: blue;
+    font-size: 15;
     font-weight: 600;
 }
 

@@ -1,11 +1,6 @@
-let dims = { height: 300, width: 300 };
-const center = { x: dims.width / 2 + 5, y: dims.height / 2 + 5 };
+// let dims = { height: 300, width: 300 };
+// const center = { x: dims.width / 2 + 5, y: dims.height / 2 + 5 };
 
-let svg = d3
-  .select(".chart")
-  .append("svg")
-  .attr("height", dims.height)
-  .attr("width", dims.width);
 
 let defaultWheels = d3
   .select("svg")
@@ -32,7 +27,7 @@ const piePoints = d3
   .sort(null)
   .value((d) => d.points);
 
-const arcPathInner = d3.arc().outerRadius(100).innerRadius(90).cornerRadius(20);
+const arcPathInner = d3.arc().outerRadius(95).innerRadius(85).cornerRadius(20);
 const arcPathOuter = d3
   .arc()
   .outerRadius(115)
@@ -49,7 +44,7 @@ let buildDefaultWheels = () => {
   paths
     .attr("class", "arc")
     .attr("d", (d) => arcPathInner(d))
-    .attr("fill", "#91bfff")
+    .attr("fill", "#00004d")
     .attr("opacity", "0.2");
 
   paths
@@ -57,8 +52,8 @@ let buildDefaultWheels = () => {
     .append("path")
     .attr("class", "arc")
     .attr("d", (d) => arcPathInner(d))
-    .attr("fill", "#91bfff")
-    .attr("opacity", "0.7");
+    .attr("fill", "#00004d")
+    .attr("opacity", "0.2");
 
   paths
     .enter()
@@ -74,18 +69,20 @@ let updateWheels = (data) => {
 
   let found = false;
   let currData = [];
-  let currDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  let currDate = `${d.getMonth() + 1}/${(Math.floor(d.getDate()/10) == 0)? "0" + d.getDate() : d.getDate()}/${d.getFullYear()}`;
+  let duration;
   for (let i = 0; i < data.length; i++) {
     if (currDate === data[i].date) {
       // console.log("Same day steps found");
       currData.push(data[i]);
+      duration = data[i].duration;
       found = true;
       break;
     }
   }
 
   if (!found) {
-    // console.log("Same day steps not found");
+    console.log("Same day steps not found");
     return;
   }
   // console.log(currData[0]);
@@ -102,7 +99,7 @@ let updateWheels = (data) => {
       if (d.data.date === "goal") {
         return "FF";
       }
-      return "#255fdb";
+      return "#00005a";
     })
     .attr("opacity", (d) => {
       if (d.data.date === "goal") {
@@ -123,7 +120,7 @@ let updateWheels = (data) => {
       if (d.data.date === "goal") {
         return "#FF";
       }
-      return "#383bfe";
+      return "#00005a";
     })
     .attr("z-index", "1000")
     .attr("opacity", (d) => {
@@ -137,7 +134,20 @@ let updateWheels = (data) => {
     .attrTween("d", (d) => arcTweenEnterInner(d));
 
   updatePointsWheel(currData);
+  updateMainStats(currData[0].steps, duration)
 };
+
+
+let updateMainStats = (steps, duration) => {
+  let calories = steps * 0.04;
+  console.log(calories, steps, duration);
+  let stats = document.querySelector('.summary-details');
+  stats.children[0].children[0].innerText = calories;
+  stats.children[1].children[0].innerText = Math.round(steps * 0.00076219512 *10)/10;
+  stats.children[2].children[0].innerText = duration;
+  console.log();
+
+}
 
 let updatePointsWheel = (currData) => {
   // Algorithm -> average steps of previous 10 days
@@ -229,10 +239,6 @@ let updatePointsWheel = (currData) => {
     .attrTween("d", (d) => arcTweenEnterOuter(d));
 };
 
-let updateCounters = (steps, heartPoints) => {
-  console.log(steps, heartPoints)
-
-};
 
 buildDefaultWheels();
 updateWheels(stepsDB);

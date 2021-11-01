@@ -30,7 +30,8 @@ stepForm.addEventListener('submit', (e) => {
     // console.log(steps);
     let data = {
         date,
-        steps
+        steps,
+        'duration' : parseInt(duration)
     }
 
     updatedb(data);
@@ -64,6 +65,7 @@ let updatedb =  (data) => {
         if(item.date === data.date){
             flag = true;
             item.steps += data.steps;
+            item.duration += data.duration;
             break; 
         }
     }
