@@ -238,3 +238,4 @@ const arcTweenEnterOuter = (d) => {
 
 updateWeeklyBar();
 updateDailyBars();
+updateEnergyBars();

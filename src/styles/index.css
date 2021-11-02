@@ -120,6 +120,16 @@ body{
       color: red;
   }
 
+  #energy .target-sec{
+      color: #4169E1;
+  }
+
+
+  #energy span{
+      font-size: 9 !important;
+  }
+
+
 
 
   
