@@ -48,7 +48,7 @@ let updateEnergyBars = () => {
   
       x += 70;  
     }
-    console.log(weekData);
+    // console.log(weekData);
   
     let target = document.querySelector("#energy .target-sec div");
       target.innerHTML = `${weekData[6][0].steps * 0.04}<span> Cal</span>`;

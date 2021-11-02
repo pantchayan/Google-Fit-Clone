@@ -48,7 +48,7 @@ let updateDailyBars = () => {
 
     x += 70;
   }
-  console.log(weekData);
+  // console.log(weekData);
 
   let target = document.querySelector("#steps .target-sec div");
     target.innerText = `${weekData[6][0].steps}`;
