@@ -40,9 +40,10 @@ let updateDailyBars = () => {
       .attr("ry", 6)
       .attr("width", 40)
       .attr("x", x)
-      .attr("y", 100 - (weekData[i][0].steps / 10000) * 100)
+      .attr("y", 100)
       .transition()
       .duration(1000)
+      .attr("y", 100 - (weekData[i][0].steps / 10000) * 100)
       .attr("height", (weekData[i][0].steps / 10000) * 100);
 
     x += 70;

@@ -1,7 +1,6 @@
 // let dims = { height: 300, width: 300 };
 // const center = { x: dims.width / 2 + 5, y: dims.height / 2 + 5 };
 
-
 let defaultWheels = d3
   .select("svg")
   .append("g")
@@ -69,7 +68,9 @@ let updateWheels = (data) => {
 
   let found = false;
   let currData = [];
-  let currDate = `${d.getMonth() + 1}/${(Math.floor(d.getDate()/10) == 0)? "0" + d.getDate() : d.getDate()}/${d.getFullYear()}`;
+  let currDate = `${d.getMonth() + 1}/${
+    Math.floor(d.getDate() / 10) == 0 ? "0" + d.getDate() : d.getDate()
+  }/${d.getFullYear()}`;
   let duration;
   for (let i = 0; i < data.length; i++) {
     if (currDate === data[i].date) {
@@ -87,7 +88,7 @@ let updateWheels = (data) => {
   }
   // console.log(currData[0]);
   currData.push({ steps: goalsDB[0].steps - currData[0].steps, date: "goal" });
-  
+
   // console.log(currData[0].steps);
   let paths = stepsWheel.selectAll("path").data(pieSteps(currData));
 
@@ -135,26 +136,22 @@ let updateWheels = (data) => {
     .attrTween("d", (d) => arcTweenEnterInner(d));
 
   updatePointsWheel(currData);
-  updateMainStats(currData[0].steps, duration)
-  
+  updateMainStats(currData[0].steps, duration);
+
   updateDailyWheels(data);
 
-  
-updateWeeklyBar();
-updateDailyBars();
 };
-
 
 let updateMainStats = (steps, duration) => {
   let calories = steps * 0.04;
   // console.log(calories, steps, duration);
-  let stats = document.querySelector('.summary-details');
+  let stats = document.querySelector(".summary-details");
   stats.children[0].children[0].innerText = calories;
-  stats.children[1].children[0].innerText = Math.round(steps * 0.00076219512 *10)/10;
+  stats.children[1].children[0].innerText =
+    Math.round(steps * 0.00076219512 * 10) / 10;
   stats.children[2].children[0].innerText = duration;
   console.log();
-
-}
+};
 
 let updatePointsWheel = (currData) => {
   let heartPoints = getHeartPoints(currData);
@@ -215,7 +212,6 @@ let updatePointsWheel = (currData) => {
     .attrTween("d", (d) => arcTweenEnterOuter(d));
 };
 
-
 buildDefaultWheels();
 updateWheels(stepsDB);
 
@@ -240,3 +236,5 @@ const arcTweenEnterOuter = (d) => {
 };
 
 
+updateWeeklyBar();
+updateDailyBars();
