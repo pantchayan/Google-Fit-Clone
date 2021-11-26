@@ -20,7 +20,8 @@ let pointsCounter = d3
   .append("text")
   .attr("id", "points-counter") 
   .style("font-size", 65)
-  .attr("transform", `translate(${-35}, ${0})`);
+  .attr('text-anchor', 'middle')
+  .attr("transform", `translate(${0}, ${0})`);
 
 let stepsCounter = d3
   .select(".main-counters")
@@ -28,7 +29,8 @@ let stepsCounter = d3
   .attr("id", "steps-counter")
   .style("font-size", 25)
   .style('font-weight', 600)
-  .attr("transform", `translate(${-30}, ${30})`);
+  .attr('text-anchor', 'middle')
+  .attr("transform", `translate(${0}, ${30})`);
 
 let updateCounters = (steps, heartPoints) => {
   d3.select("#steps-counter")

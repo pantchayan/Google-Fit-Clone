@@ -1,17 +1,14 @@
-// let dims = { height: 300, width: 300 };
-// const center = { x: dims.width / 2 + 5, y: dims.height / 2 + 5 };
-
 let defaultWheels = d3
   .select("svg")
   .append("g")
   .attr("transform", `translate(${center.x}, ${center.y})`);
+  
+  let pointsWheel = d3
+    .select("svg")
+    .append("g")
+    .attr("transform", `translate(${center.x}, ${center.y})`);
 
 let stepsWheel = d3
-  .select("svg")
-  .append("g")
-  .attr("transform", `translate(${center.x}, ${center.y})`);
-
-let pointsWheel = d3
   .select("svg")
   .append("g")
   .attr("transform", `translate(${center.x}, ${center.y})`);
@@ -90,6 +87,7 @@ let updateWheels = (data) => {
   currData.push({ steps: goalsDB[0].steps - currData[0].steps, date: "goal" });
 
   // console.log(currData[0].steps);
+  // console.log(currData)
   let paths = stepsWheel.selectAll("path").data(pieSteps(currData));
 
   //   paths.exit().transition().duration(700).attrTween("d", arcTweenExit).remove();
@@ -98,9 +96,9 @@ let updateWheels = (data) => {
     .attr("class", "arc")
     .attr("d", (d) => arcPathInner(d))
     .attr("fill", (d) => {
-      if (d.data.date === "goal") {
-        return "FF";
-      }
+      // if (d.data.date === "goal") {
+      //   return "FF";
+      // }
       return "#00005a";
     })
     .attr("opacity", (d) => {
@@ -168,6 +166,7 @@ let updatePointsWheel = (currData) => {
   });
   // points WHEEL
 
+  console.log(pointsData)
   let paths = pointsWheel.selectAll("path").data(piePoints(pointsData));
 
   paths

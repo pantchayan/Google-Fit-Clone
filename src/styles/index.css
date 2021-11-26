@@ -27,7 +27,14 @@ body{
 .visuals-sec{
     display: flex;
     justify-content: space-between;
+
 }
+
+/* @media (max-width:700) {
+    .visuals-sec{
+        max-width: 200 px;
+    }
+} */
 
 #daily .visuals-sec{
     color: blue;
